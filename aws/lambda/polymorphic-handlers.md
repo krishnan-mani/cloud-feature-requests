@@ -1,9 +1,9 @@
 ### Summary
 
-Lambda functions allow specifying a single handler.
-This request seeks support for multiple handlers based upon, for example, matching the shape of the event in an invoication.
+Lambda functions currently allow specifying a single handler method.
+This feature request seeks support for multiple handlers based upon, say, matching the shape of the event in an invoication.
 
-By doing so, it will be easier to split up and organise function code into smaller, more-focused parts that each perform a specific task well, with all of the consequent benefits.
+As a customer, I use a single Lambda function to respond to a particular source of events (say, messages on a queue, or a change stream from a DynamoDB table). However, even a single source of events can consist of different kinds of events. As the code and tests are organised around the handler function, by making it possible to use multiple handler functions, the code to respond to different kinds of events can be organised in a more focussed manner.
 
 ### Rationale
 
@@ -15,11 +15,11 @@ Furthermore, a default handler can be optionally configured. (see enhancements f
 
 #### Examples
 
-# Acting on item changes in a DynamoDB table, based upon the change to items
-# Acting on changes to files in an S3 bucket, based upon the event
+- Acting on item changes in a DynamoDB table, based upon the change to items
+- Acting on changes to files in an S3 bucket, based upon the event
 
 #### Enhancements
 
-# Configuring a default handler may be made optional (at some future point, since existing Lambda functions require one)
-# When made optional, and if the service is unable to determine an appropriate handler to invoke, invocations may follow the established error-handling semantics.
-# Provide monitoring that helps determine which handlers are invoked and how often
+- Configuring a default handler may be made optional (at some future point, since existing Lambda functions require one)
+- When made optional, and if the service is unable to determine an appropriate handler to invoke, invocations may follow the established error-handling semantics.
+- Provide monitoring that helps determine which handlers are invoked and how often
